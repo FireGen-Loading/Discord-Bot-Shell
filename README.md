@@ -1,6 +1,7 @@
 # Discord Bot Shell
 simple *kind* of shell thing to use bots through command line.
-prtty bare bones.
+
+pretty bare bones.
 
 ## Commands:
 * `i <path>` posts a image at the path
