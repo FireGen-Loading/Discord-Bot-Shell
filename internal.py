@@ -38,7 +38,7 @@ async def Message(content : str,path : str):
     channel : discord.TextChannel
     channel = bot.get_channel(channel_id)
     if path != "":
-        file = open("\\".join(working_path) + path, 'rb')
+        file = open("\\".join(working_path) + '\\' + path, 'rb')
         filedisc = discord.File(file)
         await channel.send(content, file=filedisc)
         filedisc.close()
@@ -61,7 +61,7 @@ async def Reply_Message(content : str,path : str ,id : int):
     message : discord.Message
     message = await channel.fetch_message(id)
     if path != "": 
-        file = open("\\".join(working_path) + path, 'rb')
+        file = open("\\".join(working_path) + '\\' + path, 'rb')
         filedisc = discord.File(file)
         await message.reply(content, file=filedisc)
         filedisc.close()
