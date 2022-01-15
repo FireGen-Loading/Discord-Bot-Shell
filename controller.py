@@ -39,7 +39,10 @@ async def on_ready():
         if hasattr(api,com):
             Iobject = getattr(api,com)
             if type(Iobject) == types.FunctionType:
-                await Iobject(*n[1:])
+                try: 
+                    await Iobject(*n[1:])
+                except Exception as e:
+                    print(e)
             else:
                 print("Command does not exist")
 
