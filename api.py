@@ -1,4 +1,3 @@
-from ntpath import join
 import os
 import discord
 import internal
@@ -95,3 +94,10 @@ async def cd(*stuff):
                 else:
                     print("Invalid Path")
 
+async def dm( user , *stuff):
+    contents = " ".join(stuff)
+    x = input('!Image Path :')
+    try:
+        await internal.DirectMessage(contents, x, user)
+    except Exception as e:
+        print(e)

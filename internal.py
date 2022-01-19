@@ -1,4 +1,3 @@
-from dis import disco
 import discord
 import os
 import json
@@ -13,10 +12,13 @@ working_path = []
 intents = discord.Intents.all()
 bot = discord.Client(intents=intents)
 
+
+
 def LoadProfile(name) -> bool:
     global working_path
     global channel_id
     global token
+
     path = os.getcwd()
 
     Profile = f"{path}/Profiles/{name}.json"
@@ -37,6 +39,7 @@ def LoadProfile(name) -> bool:
 async def Message(content : str,path : str):
     channel : discord.TextChannel
     channel = bot.get_channel(channel_id)
+
     if path != "":
         file = open("\\".join(working_path) + '\\' + path, 'rb')
         filedisc = discord.File(file)
@@ -45,14 +48,8 @@ async def Message(content : str,path : str):
         file.close()
         return
 
-
-    await channel.send(content)
-
-
-async def NewClient():
-    global bot
-    intents = discord.Intents.all()
-    bot = discord.Client(intents=intents)
+    else:
+        await channel.send(content)
 
 
 async def Reply_Message(content : str,path : str ,id : int):
@@ -66,7 +63,18 @@ async def Reply_Message(content : str,path : str ,id : int):
         await message.reply(content, file=filedisc)
         filedisc.close()
         file.close()
+        return
+    else:
+        await message.reply(content)
 
-    await message.reply(content)
 
-
+async def DirectMessage(content : str,path : str ,id : int):
+    user : discord.User = await bot.fetch_user(id)
+    if path != "": 
+        file = open("\\".join(working_path) + '\\' + path, 'rb')
+        filedisc = discord.File(file)
+        await user.send(content=content, file=filedisc)
+        filedisc.close()
+        file.close()
+    else:
+        await user.send(content)
