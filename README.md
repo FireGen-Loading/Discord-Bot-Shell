@@ -8,6 +8,9 @@ pretty bare bones.
 * `m <message>` `<path>` posts a message with a optional path fields
 * `r <message id> <message>` `<path>` replies to a message
 * `r <user id> <message>` `<path>` sends a dm message to the user
+* `con <channel id>/<user channel id> <limit>` gets messages from the specified channel
+* `cona <channel id>/<user channel id> <limit>` it's just `con` but with more message info
+* `getuc <user id>` get's the specified user's dm channel id(`<user channel id>`)
 * `cd` a normal cd command
 
 ## Setup:
