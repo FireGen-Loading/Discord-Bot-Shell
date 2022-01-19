@@ -7,6 +7,7 @@ pretty bare bones.
 * `i <path>` posts a image at the path
 * `m <message>` `<path>` posts a message with a optional path fields
 * `r <message id> <message>` `<path>` replies to a message
+* `r <user id> <message>` `<path>` sends a dm message to the user
 * `cd` a normal cd command
 
 ## Setup:
