@@ -1,3 +1,4 @@
+from dis import disco
 import discord
 import os
 import json
@@ -78,3 +79,20 @@ async def DirectMessage(content : str,path : str ,id : int):
         file.close()
     else:
         await user.send(content)
+
+async def Get_User_DM_Channel(id : int) -> tuple:
+
+    user : discord.User = await bot.fetch_user(id)
+    if user.dm_channel == None:
+        return await user.create_dm(), user
+    else:
+        return user.dm_channel,user 
+
+async def Get_logs(channel : (discord.TextChannel | discord.DMChannel), limit) -> list[discord.Message]:
+    history = channel.history(limit=limit)
+    n = []
+    for i in range(limit):
+        n+= [await history.next()]
+    n.reverse()
+    return n
+        
