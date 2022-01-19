@@ -1,5 +1,5 @@
 # Discord Bot Shell
-simple *kind* of shell thing to use bots through command line.
+simple *kinda* of shell thing to use bots through command line.
 
 pretty bare bones.
 
