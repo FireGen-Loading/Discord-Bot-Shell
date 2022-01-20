@@ -123,10 +123,11 @@ async def con(id,limit):
         n = await internal.Get_logs(channel,int(limit))
         for i in n:
 
-            print(f"[{i.created_at.hour}:{i.created_at.minute}] {i.author}\n >> {i.content}")
+            print(f"[{i.created_at.hour}:{i.created_at.minute}] {i.author}\n>>{i.content}")
 
     except Exception as e:
         print(e)
+        print(e.with_traceback())
 
 async def cona(id,limit):
     channel : (discord.TextChannel | discord.DMChannel)
@@ -135,7 +136,7 @@ async def cona(id,limit):
     try:
         n = await internal.Get_logs(channel, int(limit))
         for i in n:
-            print(f"[{i.created_at.hour}:{i.created_at.minute}] {i.author}\n    --[UID : {i.author.id}] [MID : {i.id}]\n>> {i.content}")
+            print(f"[{i.created_at.hour}:{i.created_at.minute}] {i.author}\n[UID : {i.author.id}] [MID : {i.id}]\n>>{i.content}")
 
     except Exception as e:
         print(e)

@@ -1,4 +1,3 @@
-from dis import disco
 import discord
 import os
 import json
@@ -89,10 +88,8 @@ async def Get_User_DM_Channel(id : int) -> tuple:
         return user.dm_channel,user 
 
 async def Get_logs(channel : (discord.TextChannel | discord.DMChannel), limit) -> list[discord.Message]:
-    history = channel.history(limit=limit)
-    n = []
-    for i in range(limit):
-        n+= [await history.next()]
-    n.reverse()
-    return n
+    history =await channel.history(limit=limit).flatten()
+
+    history.reverse()
+    return history
         
