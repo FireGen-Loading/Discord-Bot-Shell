@@ -63,7 +63,10 @@ async def cd(*stuff):
     if contents != "":
 
         if contents == "\\":
-            internal.working_path = ["C:"]
+            if os.name == 'nt':
+                internal.working_path = ["C:"]
+            elif os.name == 'posix' :
+                internal.working_path = []
 
         elif 1 < len(contents):
             if contents == "..":
