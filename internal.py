@@ -12,6 +12,14 @@ working_path = []
 intents = discord.Intents.all()
 bot = discord.Client(intents=intents)
 
+path_splitter : str = '/'
+index_offset : int = 0
+if os.name == 'nt':
+    path_splitter = '\\'
+    index_offset = 1
+elif os.name == 'posix':
+    path_splitter = '/'
+    index_offset = 0
 
 
 def LoadProfile(name) -> bool:
@@ -41,7 +49,7 @@ async def Message(content : str,path : str):
     channel = bot.get_channel(channel_id)
 
     if path != "":
-        file = open("\\".join(working_path) + '\\' + path, 'rb')
+        file = open(path_splitter.join(working_path) + path_splitter + path, 'rb')
         filedisc = discord.File(file)
         await channel.send(content, file=filedisc)
         filedisc.close()
@@ -58,7 +66,7 @@ async def Reply_Message(content : str,path : str ,id : int):
     message : discord.Message
     message = await channel.fetch_message(id)
     if path != "": 
-        file = open("\\".join(working_path) + '\\' + path, 'rb')
+        file = open(path_splitter.join(working_path) + path_splitter + path, 'rb')
         filedisc = discord.File(file)
         await message.reply(content, file=filedisc)
         filedisc.close()
@@ -71,7 +79,7 @@ async def Reply_Message(content : str,path : str ,id : int):
 async def DirectMessage(content : str,path : str ,id : int):
     user : discord.User = await bot.fetch_user(id)
     if path != "": 
-        file = open("\\".join(working_path) + '\\' + path, 'rb')
+        file = open(path_splitter.join(working_path) + path_splitter + path, 'rb')
         filedisc = discord.File(file)
         await user.send(content=content, file=filedisc)
         filedisc.close()

@@ -50,13 +50,24 @@ async def logout(*stuff):
     await exit()
 
 
+
+
 async def cd(*stuff):
+    path_splitter : str = '/'
+    index_offset : int = 0
+    if os.name == 'nt':
+        path_splitter = '\\'
+        index_offset = 1
+    elif os.name == 'posix':
+        path_splitter = '/'
+        index_offset = 0
+
     contents = " ".join(stuff)
 
-    if contents.startswith('.\\'):
-        contents = contents.removeprefix('.\\')
+    if contents.startswith('.' + path_splitter):
+        contents = contents.removeprefix('.' + path_splitter)
 
-    Path = contents.split('\\')
+    Path = contents.split(path_splitter)
 
     
 
@@ -68,14 +79,14 @@ async def cd(*stuff):
             elif os.name == 'posix' :
                 internal.working_path = []
 
-        elif 1 < len(contents):
+        elif 0 + index_offset < len(contents):
             if contents == "..":
                 internal.working_path.pop()
 
-            elif contents[1] == ':' and contents[2] == '\\':
-                if os.path.exists("\\".join(Path)):
+            if contents[1] == ':' and contents[2] == path_splitter:
+                if os.path.exists(path_splitter.join(Path)):
 
-                    if os.path.isdir("\\".join(Path)):
+                    if os.path.isdir(path_splitter.join(Path)):
 
                         internal.working_path = Path
                     else:
@@ -86,7 +97,7 @@ async def cd(*stuff):
 
 
             else:
-                tmp = "\\".join(internal.working_path + Path) 
+                tmp = path_splitter.join(internal.working_path + Path) 
                 if os.path.exists(tmp):
 
                     if os.path.isdir(tmp):
