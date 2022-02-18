@@ -83,7 +83,7 @@ async def cd(*stuff):
             if contents == "..":
                 internal.working_path.pop()
 
-            if contents[1] == ':' and contents[2] == path_splitter:
+            elif contents[1] == ':' and contents[2] == path_splitter:
                 if os.path.exists(path_splitter.join(Path)):
 
                     if os.path.isdir(path_splitter.join(Path)):
